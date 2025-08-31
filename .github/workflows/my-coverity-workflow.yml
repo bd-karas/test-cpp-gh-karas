@@ -1,4 +1,4 @@
-name: GitHub My Coverity Workflow
+name: My Coverity Workflow
 # Use this YAML in your workflow file for each job
 # Example: https://documentation.blackduck.com/ja-JP/bundle/bridge/page/documentation/c_github-coverity.html
 
@@ -30,6 +30,27 @@ jobs:
         run: |
           ./a.out
 
+      - name: Coverity Scan
+        uses: blackduck-inc/black-duck-security-scan@v2
+        with:
+          ### SCANNING: Required fields
+          coverity_url: ${{ vars.COVERITY_URL }}
+          coverity_user: ${{ secrets.COVERITY_USER }}
+          coverity_passphrase: ${{ secrets.COVERITY_PASSPHRASE }}
+                            
+          ### POLICY ENFORCEMENT: Break build on full scan when encounter oustanding issues
+          #coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
+                            
+          ### PULL REQUEST COMMENTS:
+          #coverity_prComment_enabled: true
+          
+          # Required when PR comments is enabled
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          ### Perform local analysis with full toolkit
+          # coverity_local: true
+
+          
 #      - name: Coverity BAC
 #        run: |
 #          cov-configure --gcc --config config/config.xml
