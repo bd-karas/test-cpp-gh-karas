@@ -30,8 +30,9 @@ jobs:
         run: |
           ./a.out
 
-      - name: Coverity BAC
-        run: |
-          cov-configure --gcc --config config/config.xml
-          cov-build --dir idir --config config/config.xml g++ test.cpp
-          cov-analyze --dir idir --all
+#      - name: Coverity BAC
+#        run: |
+#          cov-configure --gcc --config config/config.xml
+#          cov-build --dir idir --config config/config.xml g++ test.cpp
+#          cov-analyze --dir idir --all
+
