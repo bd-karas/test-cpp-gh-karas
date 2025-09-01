@@ -48,7 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
           ### Perform local analysis with full toolkit
-          # coverity_local: true
+          coverity_local: true
 
           
 #      - name: Coverity BAC
