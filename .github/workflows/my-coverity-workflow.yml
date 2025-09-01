@@ -22,14 +22,6 @@ jobs:
         run: |
           pwd
 
-      - name: Build the app
-        run: |
-          g++ test.cpp
-
-      - name: Run the app
-        run: |
-          ./a.out
-
       - name: Coverity Scan
         uses: blackduck-inc/black-duck-security-scan@v2
         with:
@@ -39,10 +31,10 @@ jobs:
           coverity_passphrase: ${{ secrets.COVERITY_PASSPHRASE }}
                             
           ### POLICY ENFORCEMENT: Break build on full scan when encounter oustanding issues
-          #coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
+          coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
                             
           ### PULL REQUEST COMMENTS:
-          #coverity_prComment_enabled: true
+          coverity_prComment_enabled: true
           
           # Required when PR comments is enabled
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -53,10 +45,5 @@ jobs:
           ### e.g. /opt/cov-analysis-linux64-2025.6.2 (Don't include "bin")
           coverity_install_directory: ${{ vars.COVERITY_INSTALL_DIRECTORY }}
 
-          
-#      - name: Coverity BAC
-#        run: |
-#          cov-configure --gcc --config config/config.xml
-#          cov-build --dir idir --config config/config.xml g++ test.cpp
-#          cov-analyze --dir idir --all
+
 
