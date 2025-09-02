@@ -2,3 +2,7 @@ capture:
   build:
 #    clean-command: mvn -B clean
     build-command: g++ test.cpp
+
+commit:
+  connect:
+    stream: test-cpp-gh-karas-main
